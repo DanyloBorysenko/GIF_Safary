@@ -22,7 +22,7 @@ val Typography = Typography(
     displayLarge = TextStyle(
         fontFamily = londrina_solid_black,
         fontWeight = FontWeight.Normal,
-        fontSize = 36.sp
+        fontSize = 40.sp
     )
     /* Other default text styles to override
     titleLarge = TextStyle(

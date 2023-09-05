@@ -23,6 +23,8 @@ sealed interface GifSafaryUiState {
 
 class GifSafaryViewModel(private val gifsRepository: GifsRepository) : ViewModel() {
     var uiState : GifSafaryUiState by mutableStateOf(GifSafaryUiState.Loading)
+    var keyword by mutableStateOf("")
+        private set
 
     init {
         findGifs()
@@ -30,14 +32,26 @@ class GifSafaryViewModel(private val gifsRepository: GifsRepository) : ViewModel
 
     fun findGifs() {
         viewModelScope.launch {
-            uiState = try {
-                GifSafaryUiState.Success(
-                    gifsList = gifsRepository.getGifs(),
-                    gif = null
-                )
-            } catch (e: IOException) {
-                GifSafaryUiState.Error
+            if (keyword == "") {
+                uiState = try {
+                    GifSafaryUiState.Success(
+                        gifsList = gifsRepository.getGifs("transparent"),
+                        gif = null
+                    )
+                } catch (e: IOException) {
+                    GifSafaryUiState.Error
+                }
+            } else {
+                uiState = try {
+                    GifSafaryUiState.Success(
+                        gifsList = gifsRepository.getGifs(keyword = keyword),
+                        gif = null
+                    )
+                } catch (e: IOException) {
+                    GifSafaryUiState.Error
+                }
             }
+
         }
     }
     companion object {
@@ -52,5 +66,9 @@ class GifSafaryViewModel(private val gifsRepository: GifsRepository) : ViewModel
 
     fun setSelectedGif(gif: Gif) {
         uiState = (uiState as GifSafaryUiState.Success).copy(gif = gif)
+    }
+    fun updateKeyword(newKeyword : String) {
+        keyword =  newKeyword
+        findGifs()
     }
 }

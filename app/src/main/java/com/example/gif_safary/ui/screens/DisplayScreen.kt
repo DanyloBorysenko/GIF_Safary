@@ -12,6 +12,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import coil.ImageLoader
@@ -53,6 +54,7 @@ fun ShowGifs(gif: Gif) {
                     size(Size.ORIGINAL)
                 }).crossfade(true).build(), imageLoader = imageLoader
             ),
+            contentScale = ContentScale.Crop,
             contentDescription = gif.title,
             modifier = Modifier.fillMaxWidth()
         )

@@ -6,15 +6,15 @@ import com.example.gif_safary.network.GifApiService
 import kotlinx.serialization.json.Json
 
 interface GifsRepository {
-    suspend fun getGifs() : List<Gif>
+    suspend fun getGifs(keyword: String) : List<Gif>
 }
 class NetworkGifsRepository(private val gifApiService: GifApiService) : GifsRepository {
-    override suspend fun getGifs(): List<Gif> {
+    override suspend fun getGifs(keyword: String): List<Gif> {
         val jsonConfig = Json {
             ignoreUnknownKeys = true
         }
         val serverResponse =
-            jsonConfig.decodeFromString<ServerResponse>(gifApiService.getAllGifs())
+            jsonConfig.decodeFromString<ServerResponse>(gifApiService.getAllGifs(keyword = keyword))
         return serverResponse.data
     }
 }

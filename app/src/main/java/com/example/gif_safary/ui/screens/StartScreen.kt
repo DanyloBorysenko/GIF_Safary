@@ -17,6 +17,7 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -53,8 +54,7 @@ fun GifsGrid(
     paddingValues: PaddingValues,
     gifs: List<Gif>,
     onClick: () -> Unit,
-    chooseSelectedGif: (Gif) -> Unit,
-    modifier: Modifier = Modifier) {
+    chooseSelectedGif: (Gif) -> Unit) {
     LazyVerticalGrid(columns = GridCells.Fixed(3), contentPadding = paddingValues) {
         items(gifs) {
             GifCard(
@@ -89,6 +89,7 @@ fun GifCard(
                 size(coil.size.Size.ORIGINAL)
             }).crossfade(true).build(), imageLoader = imageLoader
         ),
+        contentScale = ContentScale.Crop,
         contentDescription = gif.title,
         modifier = modifier.fillMaxWidth().clickable {
             onClick()
