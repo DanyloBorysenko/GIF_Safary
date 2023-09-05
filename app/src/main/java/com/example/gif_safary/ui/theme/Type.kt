@@ -2,9 +2,13 @@ package com.example.gif_safary.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.sp
+import com.example.gif_safary.R
+
+val londrina_solid_black = FontFamily(Font(R.font.londrina_solid_black))
 
 // Set of Material typography styles to start with
 val Typography = Typography(
@@ -14,6 +18,11 @@ val Typography = Typography(
         fontSize = 16.sp,
         lineHeight = 24.sp,
         letterSpacing = 0.5.sp
+    ),
+    displayLarge = TextStyle(
+        fontFamily = londrina_solid_black,
+        fontWeight = FontWeight.Normal,
+        fontSize = 36.sp
     )
     /* Other default text styles to override
     titleLarge = TextStyle(

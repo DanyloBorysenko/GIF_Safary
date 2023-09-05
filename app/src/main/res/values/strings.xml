@@ -1,3 +1,5 @@
 <resources>
-    <string name="app_name">GIF_Safary</string>
+    <string name="app_name">GIF Safary</string>
+    <string name="network_connection_error">Failed to load</string>
+    <string name="loading_screen_cont_descr">Loading</string>
 </resources>
