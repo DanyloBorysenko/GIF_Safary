@@ -30,28 +30,21 @@ class GifSafaryViewModel(private val gifsRepository: GifsRepository) : ViewModel
         findGifs()
     }
 
+
     fun findGifs() {
         viewModelScope.launch {
-            if (keyword == "") {
-                uiState = try {
-                    GifSafaryUiState.Success(
-                        gifsList = gifsRepository.getGifs("transparent"),
-                        gif = null
-                    )
-                } catch (e: IOException) {
-                    GifSafaryUiState.Error
-                }
-            } else {
-                uiState = try {
-                    GifSafaryUiState.Success(
-                        gifsList = gifsRepository.getGifs(keyword = keyword),
-                        gif = null
-                    )
-                } catch (e: IOException) {
-                    GifSafaryUiState.Error
-                }
+            uiState = try {
+                GifSafaryUiState.Success(
+                    gif = null,
+                    gifsList = if (keyword == "") {
+                        gifsRepository.getGifs(null)
+                    } else {
+                        gifsRepository.getGifs(keyword)
+                    }
+                )
+            } catch (e: IOException) {
+                GifSafaryUiState.Error
             }
-
         }
     }
     companion object {

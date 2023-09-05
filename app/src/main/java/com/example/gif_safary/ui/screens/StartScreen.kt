@@ -85,7 +85,7 @@ fun GifCard(
         .build()
     Image(
         painter = rememberAsyncImagePainter(
-            ImageRequest.Builder(context).data(data = gif.images.previewGif.url).apply(block = {
+            ImageRequest.Builder(context).data(data = gif.images.fixedHeight.url).apply(block = {
                 size(coil.size.Size.ORIGINAL)
             }).crossfade(true).build(), imageLoader = imageLoader
         ),

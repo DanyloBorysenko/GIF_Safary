@@ -1,17 +1,11 @@
 package com.example.gif_safary
 
-import android.util.Log
-import androidx.annotation.DrawableRes
 import androidx.annotation.StringRes
-import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
-import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
@@ -23,20 +17,15 @@ import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.ShapeDefaults
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
-import androidx.compose.material3.TextFieldColors
-import androidx.compose.material3.TextFieldDefaults
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.focus.focusModifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
@@ -45,11 +34,13 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.example.gif_safary.ui.screens.GifSafaryViewModel
 import com.example.gif_safary.ui.screens.DisplayScreen
-import com.example.gif_safary.ui.screens.GifSafaryUiState
 import com.example.gif_safary.ui.screens.StartScreen
-import com.example.gif_safary.ui.theme.GIF_SafaryTheme
 
-enum class GifSafary {
+/**
+ * START and DISPLAY are the screens that are used by NavHostController
+ */
+
+enum class GifSafaryScreens {
     START,
     DISPLAY
 }
@@ -72,18 +63,18 @@ fun GifSafaryApp(
 
         NavHost(
             navController = navController,
-            startDestination = GifSafary.START.name,
+            startDestination = GifSafaryScreens.START.name,
             modifier = Modifier.padding(paddingValues)) {
-            composable(route = GifSafary.START.name) {
+            composable(route = GifSafaryScreens.START.name) {
                 StartScreen(
                     paddingValues = paddingValues, viewModel.uiState,
                     onClick = {
-                        navController.navigate(route = GifSafary.DISPLAY.name)
+                        navController.navigate(route = GifSafaryScreens.DISPLAY.name)
                     },
                     chooseSelectedGif = {viewModel.setSelectedGif(it) }
                 )
             }
-            composable(route = GifSafary.DISPLAY.name) {
+            composable(route = GifSafaryScreens.DISPLAY.name) {
                 DisplayScreen(viewModel.uiState)
             }
         }
@@ -95,9 +86,9 @@ fun GifSafaryApp(
 @Composable
 fun SafaryAppBar(
     @StringRes appName: Int,
-    textFieldValue : String,
+    textFieldValue: String,
     onValChange: (String) -> Unit,
-    scrollBehavior : TopAppBarScrollBehavior,
+    scrollBehavior: TopAppBarScrollBehavior,
     modifier: Modifier = Modifier) {
     CenterAlignedTopAppBar (
         title = {
@@ -109,9 +100,8 @@ fun SafaryAppBar(
                     text = stringResource(id = appName),
                     style = MaterialTheme.typography.displayLarge,
                     color = MaterialTheme.colorScheme.secondary,
-                modifier = Modifier.padding(start = 30.dp))
-                Spacer(modifier = Modifier.width(60.dp))
-
+                modifier = Modifier.padding(start = 15.dp))
+                Spacer(modifier = Modifier.width(40.dp))
                 EditWordField(
                     value = textFieldValue,
                     onValChange = onValChange,
@@ -130,7 +120,7 @@ fun SafaryAppBar(
 fun EditWordField(
     value: String,
     onValChange: (String) -> Unit,
-    keyboardOptions: KeyboardOptions, modifier: Modifier = Modifier) {
+    keyboardOptions: KeyboardOptions) {
     OutlinedTextField(
         value = value,
         singleLine = true,
@@ -142,13 +132,4 @@ fun EditWordField(
             .fillMaxWidth()
             .padding(10.dp)
     )
-}
-
-@OptIn(ExperimentalMaterial3Api::class)
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    GIF_SafaryTheme {
-        SafaryAppBar(appName = R.string.app_name, "", {},scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior())
-    }
 }
