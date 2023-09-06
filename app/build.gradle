@@ -8,10 +8,6 @@ android {
     namespace 'com.example.gif_safary'
     compileSdk 33
 
-    buildFeatures {
-        buildConfig = true
-    }
-
     defaultConfig {
         applicationId "com.example.gif_safary"
         minSdk 24
@@ -23,9 +19,6 @@ android {
         vectorDrawables {
             useSupportLibrary true
         }
-        Properties properties = new Properties()
-        properties.load(project.rootProject.file("local.properties").newDataInputStream())
-        buildConfigField "String", "GYPHY_API_KEY", "\"${properties.getProperty("GYPHY_API_KEY")}\""
     }
 
     buildTypes {
