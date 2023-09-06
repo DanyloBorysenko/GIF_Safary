@@ -1,14 +1,15 @@
 package com.example.gif_safary.network
 
+import com.example.gif_safary.BuildConfig
 import retrofit2.http.GET
 import retrofit2.http.Query
 
 /**
- * KEY is a key that you must get from GYPHY website.
+ *
  * KEYWORD is used for default loading gifs on the start screen. Can be changed on any word
  */
 
-private const val KEY = "6YLqI0TfL00373q7yObRII1QkoPLMkNk"
+private const val KEY = BuildConfig.GYPHY_API_KEY
 private const val KEYWORD = "transparent"
 private const val LIMIT = 25
 private const val OFFSET = 0
