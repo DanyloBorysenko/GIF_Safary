@@ -14,6 +14,8 @@ Android application that loads GIFs from Giphy.com to your smartphone. Every GIF
 Clone this project to your Android Studio. Find network/GifApiService.kt file. On the line ```private const val KEY = "YOUR_KEY"``` write your key that you can get from Giphy.com. 
 That is all! Run the project on your emulator or device. 
 ## :eyes:How it looks like
-
+<p align="center">
+<img src="Screenshot_20230912-151932_GIF Safary.jpg" />
+</p>
 
 If you need any further assistance, feel free to reach out.
