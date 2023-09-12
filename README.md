@@ -15,9 +15,9 @@ Clone this project to your Android Studio. Find network/GifApiService.kt file. O
 That is all! Run the project on your emulator or device. 
 ## :eyes:How it looks like
 <p align="center">
-<img src="GIF Safary_dark.jpg" />
 <img src="GIF Safary_light1.jpg" />
 <img src="GIF Safary_light_2screen.jpg" />
+<img src="GIF Safary_dark.jpg" />
 </p>
 
 If you need any further assistance, feel free to reach out.
